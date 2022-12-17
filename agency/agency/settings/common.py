@@ -30,6 +30,7 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     "apps.hitmen",
+    "apps.hits",
 ]
 
 THIRD_APPS = []
