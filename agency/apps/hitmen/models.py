@@ -21,7 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    description = models.TextField("Description", max_length=50)
+    description = models.TextField("Description", max_length=50, blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="A")
     manager = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -36,9 +36,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["name"]
 
     objects = UserManager()
-
-    def get_short_name(self):
-        return self.email
-
-    def get_full_name(self):
-        return self.name
