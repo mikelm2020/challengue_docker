@@ -23,7 +23,11 @@ class Hits(models.Model):
     description = models.CharField("Description", max_length=50, blank=True, null=True)
     target_name = models.CharField("Target Name", max_length=50)
     status = models.PositiveIntegerField(choices=STATUS_CHOICES, default=1)
-    creator = models.PositiveIntegerField()
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name="created_for",
+        on_delete=models.CASCADE
+    )
 
     objects = HitManager()
 

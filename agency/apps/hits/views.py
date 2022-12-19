@@ -2,19 +2,19 @@ from apps.hitmen.mixins import (
     AdminAndManagersPermissionMixin,
     AutheticatedPermissionMixin,
 )
-from apps.hits.forms import HitAddForm, HitAddBulkForm
+from apps.hits.forms import HitAddForm, HitAddBulkForm, HitUpdateForm
 from apps.hits.models import Hits
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView
 from django.views.generic.edit import FormView
 from apps.hitmen.managers import UserManager
 from apps.hitmen.models import User
 from django.shortcuts import redirect
-
+from django.urls import reverse_lazy
 
 class HitRegisterView(AdminAndManagersPermissionMixin, FormView):
     template_name = "hits/register.html"
     form_class = HitAddForm
-    success_url = "hits/"
+    success_url = reverse_lazy("hits_app:hit-list")
 
     def get_form(self, form_class=None):
         if form_class is None:
@@ -27,7 +27,7 @@ class HitRegisterView(AdminAndManagersPermissionMixin, FormView):
         self.object.user = self.request.user
         self.object.save()
         
-        return redirect(self.get_success_url)
+        return super(HitRegisterView, self).form_valid(form)
 
 
 
@@ -35,7 +35,7 @@ class HitRegisterView(AdminAndManagersPermissionMixin, FormView):
 class HitAddBulkView(AdminAndManagersPermissionMixin, FormView):
     template_name = "hits/bulk.html"
     form_class = HitAddBulkForm
-    success_url = "hits/"
+    success_url = "/hits"
 
     def form_valid(self, form):
 
@@ -50,9 +50,22 @@ class HitAddBulkView(AdminAndManagersPermissionMixin, FormView):
         return super(HitAddBulkView, self).form_valid(form)
 
 
-class HitDetailView(AutheticatedPermissionMixin, DetailView):
+class HitDetailView(AutheticatedPermissionMixin, UpdateView):
     model = Hits
     template_name = "hits/detail.html"
+    success_url = reverse_lazy("hits_app:hit-list")
+    form_class = HitUpdateForm
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+
+    #     return super().post(request, *args, **kwargs)
+    
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.save()
+
+    #     return super(HitDetailView, self).form_valid(form)
 
 
 class HitListView(AutheticatedPermissionMixin, ListView):

@@ -5,19 +5,72 @@
 {% block panel-content %}
 
 <div class="grid-x grid-margin-x align-center">
-  <h5 class="cell" style="margin-bottom: 1em; text-align: center;">Hit Detail</h5>  
-  <div class="cell medium-9 grid-x grid-margin-x align-center">
+  <h3 class="cell" style="margin-bottom: 1em; text-align: center;">Hit Detail</h3>  
+  <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %}
     
-    <div class="cell medium-7">
-        <div class="card cell">
-            <div class="card-section">
-              <h4>{{ object.name }}</h4>
-              <p><span style="font-weight: bold;">Assigne:</span> {{ object.assigne }}</p>
-              <p><span style="font-weight: bold;">Description:</span> {{ object.description }}</p>
-              <p><span style="font-weight: bold;">Target Name:</span> {{ object.target_name }}</p>
-              <p><span style="font-weight: bold;">Status:</span> {{ object.status }}</p>
-              <p><span style="font-weight: bold;">Creator:</span> {{ object.get_creator.display }}</p>
-            </div>
-        </div>
+    <div class="cell medium-12">
+      <label>Assigne:</label>
+      <div class="input-group">
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.assigne }}
+      </div>
+      {% for error in form.assigne.errors %}
+        <p class="cell" style="color: red;">
+          {{ error|escape }}
+        </p>
+      {% endfor %}
     </div>
+    <div class="cell medium-12">
+      <label>Description:</label>
+      <div class="input-group">
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.description }}
+      </div>
+      {% for error in form.description.errors %}
+        <p class="cell" style="color: red;">
+          {{ error|escape }}
+        </p>
+      {% endfor %}
+    </div>
+    <div class="cell medium-6">
+      <label>Target Name:</label>
+      <div class="input-group">
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.target_name }}
+      </div>
+      {% for error in form.target_name.errors %}
+        <p class="cell" style="color: red;">
+          {{ error|escape }}
+        </p>
+      {% endfor %}
+    </div>
+    <div class="cell medium-6">
+      <label>Status:</label>
+      <div class="input-group">
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.status }}
+      </div>
+      {% for error in form.status.errors %}
+        <p class="cell" style="color: red;">
+          {{ error|escape }}
+        </p>
+      {% endfor %}
+    </div>
+    <div class="cell medium-12">
+      <label>Creator:</label>
+      <div class="input-group">
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.creator }}
+      </div>
+      {% for error in form.creator.errors %}
+        <p class="cell" style="color: red;">
+          {{ error|escape }}
+        </p>
+      {% endfor %}
+    </div>
+    <div class="cell medium-8">
+      <button type="submit" class="cell success button" style="width: 200px;">Save</button>
+    </div>
+  </form>
+</div>
 {% endblock panel-content %}

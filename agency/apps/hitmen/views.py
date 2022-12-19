@@ -1,4 +1,4 @@
-from apps.hitmen.forms import LoginForm, UserRegisterForm
+from apps.hitmen.forms import LoginForm, UserRegisterForm, UserUpdateForm
 from apps.hitmen.mixins import (
     AdminAndManagersPermissionMixin,
     AutheticatedPermissionMixin,
@@ -7,7 +7,7 @@ from apps.hitmen.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, View
+from django.views.generic import DetailView, ListView, View, UpdateView
 from django.views.generic.edit import FormView
 
 
@@ -27,9 +27,12 @@ class UserRegisterView(FormView):
         return super(UserRegisterView, self).form_valid(form)
 
 
-class UserDetailView(AutheticatedPermissionMixin, DetailView):
+class UserDetailView(AutheticatedPermissionMixin, UpdateView):
     model = User
     template_name = "hitmen/detail.html"
+    form_class = UserUpdateForm
+    success_url = reverse_lazy("hitmen_app:hitman-list")
+
 
 
 class LoginUser(FormView):

@@ -56,6 +56,18 @@
         </p>
       {% endfor %}
     </div>
+    <div class="cell medium-12">
+      <label>Creator:</label>
+      <div class="input-group">
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.creator }}
+      </div>
+      {% for error in form.creator.errors %}
+        <p class="cell" style="color: red;">
+          {{ error|escape }}
+        </p>
+      {% endfor %}
+    </div>
     <div class="cell medium-8">
       <button type="submit" class="cell success button" style="width: 200px;">Save</button>
       {% if object %}
