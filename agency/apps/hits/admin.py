@@ -1,3 +1,4 @@
 from django.contrib import admin
+from apps.hits.models import Hits
 
-# Register your models here.
+admin.site.register(Hits)

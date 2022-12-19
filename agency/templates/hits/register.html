@@ -1,62 +1,61 @@
-{% extends "base.html" %}
+{% extends "hits/base_hits.html" %}
 
 {% load  static %}
 
-{% block content %}
+{% block panel-content %}
 
 <div class="grid-x grid-margin-x align-center">
-  <h3 class="cell" style="margin-bottom: 1em; text-align: center;">Welcome to Agency</h3>  
+  <h3 class="cell" style="margin-bottom: 1em; text-align: center;">Register a Hit</h3>  
   <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %}
     
     <div class="cell medium-12">
-      <label>Name:</label>
+      <label>Assigne:</label>
       <div class="input-group">
         <span class="input-group-label"><i class="fi-book"></i></span>
-        {{ form.name }}
+        {{ form.assigne }}
       </div>
-      {% for error in form.name.errors %}
+      {% for error in form.assigne.errors %}
         <p class="cell" style="color: red;">
           {{ error|escape }}
         </p>
       {% endfor %}
     </div>
     <div class="cell medium-12">
-      <label>Email:</label>
+      <label>Description:</label>
       <div class="input-group">
-        <span class="input-group-label"><i class="fi-mail"></i></span>
-        {{ form.email }}
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.description }}
       </div>
-      {% for error in form.email.errors %}
+      {% for error in form.description.errors %}
         <p class="cell" style="color: red;">
           {{ error|escape }}
         </p>
       {% endfor %}
     </div>
     <div class="cell medium-6">
-      <label>Password:</label>
+      <label>Target Name:</label>
       <div class="input-group">
-        <span class="input-group-label"><i class="fi-key"></i></span>
-        {{ form.password }}
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.target_name }}
       </div>
-      {% for error in form.password.errors %}
+      {% for error in form.target_name.errors %}
         <p class="cell" style="color: red;">
           {{ error|escape }}
         </p>
       {% endfor %}
     </div>
     <div class="cell medium-6">
-      <label>Repeat Password:</label>
+      <label>Status:</label>
       <div class="input-group">
-        <span class="input-group-label"><i class="fi-key"></i></span>
-        {{ form.repeat_password }}
+        <span class="input-group-label"><i class="fi-book"></i></span>
+        {{ form.status }}
       </div>
-      {% for error in form.repeat_password.errors %}
+      {% for error in form.status.errors %}
         <p class="cell" style="color: red;">
           {{ error|escape }}
         </p>
       {% endfor %}
     </div>
-
     <div class="cell medium-8">
       <button type="submit" class="cell success button" style="width: 200px;">Save</button>
       {% if object %}
@@ -66,4 +65,4 @@
   </form>
 </div>
 
-{% endblock content %}
+{% endblock panel-content %}

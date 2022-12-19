@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # users app
     re_path('', include('apps.hitmen.urls')),
+    re_path('', include('apps.hits.urls')),
 ]

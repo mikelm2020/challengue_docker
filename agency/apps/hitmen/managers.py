@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import BaseUserManager
 from django.db import models
 
@@ -37,3 +36,9 @@ class UserManager(BaseUserManager, models.Manager):
 
     def manager_of_hitman(self, hitman):
         return self.get(id=hitman).manager
+
+    def hitmen_to_select(self, hitman):
+        if hitman.is_superuser:
+            return self.filter(status="A")
+        else:
+            return self.filter(status="A", manager=hitman)

@@ -7,7 +7,7 @@ class Hits(models.Model):
     ASSIGNED = 1
     FAILLED_ASSIGNED = 2
     COMPLETED = 3
-    #
+    
 
     STATUS_CHOICES = [
         (ASSIGNED, "Assigned"),
@@ -21,13 +21,14 @@ class Hits(models.Model):
         on_delete=models.CASCADE
     )
     description = models.CharField("Description", max_length=50, blank=True, null=True)
-    taget_name = models.CharField("Target Name", max_length=50)
+    target_name = models.CharField("Target Name", max_length=50)
     status = models.PositiveIntegerField(choices=STATUS_CHOICES, default=1)
-    creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name="owner",
-        on_delete=models.CASCADE,
-    )
+    creator = models.PositiveIntegerField()
 
     objects = HitManager()
+
+    class Meta:
+        verbose_name = "Hit"
+        verbose_name_plural = "Hits"
+        
 

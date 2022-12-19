@@ -14,13 +14,13 @@
                     <a href="#"><span class="label warning">Hits</span></a>
                     <ul class="nested vertical menu">
                       <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
-                        <a href="" style="color: white;">Create</a>
+                        <a href="{% url 'hits_app:hit-register' %}" style="color: white;">Create</a>
                       </li>
                       <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                        <a href="" style="color: white;">List</a>
+                        <a href="{% url 'hits_app:hit-list' %}" style="color: white;">List</a>
                       </li>
                       <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                        <a href="" style="color: white;">Reassignment</a>
+                        <a href="{% url 'hits_app:hit-bulk' %}" style="color: white;">Reassignment</a>
                       </li>
                     </ul>
                   </li>

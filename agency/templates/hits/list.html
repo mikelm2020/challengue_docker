@@ -1,0 +1,58 @@
+{% extends "hits/base_hits.html" %}
+
+{% load  static %}
+
+{% block panel-content %}
+
+<div class="grid-x grid-margin-x align-center">
+    <h3 class="cell" style="margin-bottom: 1em; text-align: center;">Hits</h3>  
+    <table class="cell">
+        <thead>
+            <th>Assigne</th>
+            <th>Description</th>
+            <th>Target Name</h>
+            <th>Creator</h>
+            <th>Status</h>
+            <th>Detail</h>
+        </thead>
+        <tbody>
+          {% for hit in hits %}
+            <tr>
+              <td>{{ hit.assigne }}</td>
+              <td>{{ hit.description }}</td>
+              <td>{{ hit.target_name }}</td>
+              <td>{{ hit.creator }}</td>
+              <td>
+                {% if hit.status == 1 %}
+                  <span class="label warning">Assigned</span>
+                {% elif hit.status == 2 %}
+                  <span class="label alert">Failled Assigned</span>
+                {% else %}
+                  <span class="label succes">Completed</span>
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'hits_app:hit-detail' hit.id %}" class="label warning"><i class="fi-eye"></i></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
+      </span>
+  </div>
+</div>
+
+{% endblock panel-content %}
